@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+</head>
+<script>
+    $(document).ready(function () {
+        $("#btnSignup").click(function () {
+            $("#myModal").modal();
+        });
+        // kiem tra ho ten
+        $("#txthoTen").blur(function () {
+            let hoTen = $("#txthoTen").val().trim();
+            let regex = /^[A-Z][a-z]*( [A-Z][a-z]*)*$/;
+            if (!regex.test(hoTen)) {
+                $("#tbhoTen").html("Nhập sai");
+            } else {
+                $("#tbhoTen").html("Nhập đúng");
+            }
+        });
+        // Kiểm tra Mật khẩu
+        $("#txtPassword").blur(function () {
+            let password = $("#txtPassword").val().trim();
+            let regex = /^[A-Za-z0-9]*$/;
+            if (!regex.test(password)) {
+                $("#tbSpassword").html("Nhập sai");
+            } else {
+                $("#tbPasword").html("Nhập đúng");
+            }
+        });
+
+        // Kiểm tra SDT
+        $("#txtSDT").blur(function () {
+            let sdt = $("#txtSDT").val().trim();
+            let regex = /^0\d{3}-\d{3}-\d{3}$/;
+            if (!regex.test(sdt)) {
+                $("#tbSDT").html("Nhập sai");
+            } else {
+                $("#tbSDT").html("Nhập đúng");
+            }
+        });
+
+         // Kiểm tra mail
+         $("#txtmail").blur(function () {
+            let mail = $("#txtmail").val().trim();
+            let regex = /^[a-zA-Z][w.-]*@gmail\.com$/; 
+            if (!regex.test(mail)) {
+                $("#tbmail").html("Nhập sai");
+            } else {
+                $("#tbmail").html("Nhập đúng");
+            }
+        });    
+
+        // Xử lý khi click vào button Lưu
+        $("#btnLuu").click(function () {
+            // Kiểm tra tất cả các điều kiện
+            let hoTen = $("#tbhoTen").html();
+            let sdt = $("#tbSDT").html();
+            let mail = $("#tbmail").html();
+            if (hoTen === "Nhập đúng"&& sdt === "Chọn đúng" && mail === "Nhập đúng") {
+                // Nếu tất cả đều đúng, thực hiện lưu vào bảng
+                let stt = $("#tblDanhSach tr").length;
+                let newRow = "<tr><td>" + (stt + 1) + "</td><td>" + "</td><td>" + $("#txthoTen").val() + "</td><td>" + "</td><td>" + "</td><td>" + $("#txtSDT").val() + "</td><td>" + $("#txtEmail").val() + "</td></tr>";
+                $("#tblDanhSach").append(newRow);
+                // Đóng modal
+                $("#myModal").modal("hide");
+            } else {
+                // Nếu có ít nhất một điều kiện không đúng, hiển thị thông báo
+                alert("Vui lòng kiểm tra lại thông tin đã nhập.");
+            }
+        });
+    });
+</script>
+
+<body>
+        <div class="container">
+            <div class="row">
+                <nav>
+                    <ul class="navbar navbar-expand nav">
+                        <li class="nav-item"><a href="#" class="nav-link" id="btnOpen" data-bs-toggle="modal"
+                                data-bs-target="#myModal">Đăng ký</a></li>
+                    </ul>
+                </nav>
+            </div>
+    
+    </form>
+<div class="row">
+    <div class="col-md-8 col-12">
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mx-auto">THÔNG TIN CÁ NHÂN</h5>
+                        <button class="btn-close" data-dismiss="modal" aria-label="close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row text-right">
+                                <label for="txthoTen"
+                                    class="col-sm-4 col-form-label lblDC label-danger text-right">Tên đăng nhập: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txthoTen"
+                                        aria-describedby="txthoTen" placeholder="Họ tên: Tran Van">
+                                    <small id="tbhoTen" class="form-text text-danger">*</small>
+                                </div>
+                            </div>     
+                            <div class="form-group row text-right">
+                                <label for="txtPassword"
+                                    class="col-sm-4 col-form-label lblMa label-danger text-right">PassWord:
+                                    </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txtpassword"
+                                        aria-describedby="txtSDT" placeholder="Tùy thích">
+                                    <small id="tbPassword" class="form-text text-danger">*</small>
+                                </div>
+                            </div>                                                                         
+                            <div class="form-group row text-right">
+                                <label for="txtSDT"
+                                    class="col-sm-4 col-form-label lblMa label-danger text-right">số điện thoại:
+                                    </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txtSDT"
+                                        aria-describedby="txtSDT" placeholder="SDT: 0xxx-xxx-xxx">
+                                    <small id="tbSDT" class="form-text text-danger">*</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row text-right">
+                                <label for="txtmail"
+                                    class="col-sm-4 col-form-label lblMa label-danger text-right">Email
+                                    </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txtmail"
+                                        aria-describedby="txtmail" placeholder="Email: xxxxxx@gmai.com">
+                                    <small id="tbmail" class="form-text text-danger">*</small>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="w-100 bg-success border rounded-2 p-2 text-light fw-100 h4"
+                            id="btnLuu">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
