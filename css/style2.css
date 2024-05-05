@@ -164,3 +164,8 @@ footer{
     left: 680px;
     padding: 2%;
 }
+#i1{
+    position: relative;
+    left: 700px;
+    bottom: 225px;
+}
